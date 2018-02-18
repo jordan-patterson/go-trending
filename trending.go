@@ -61,35 +61,35 @@ type Trending struct {
 // It provides information as printed on the source website https://github.com/trending.
 type Project struct {
 	// Name is the name of the repository including user / organisation like "andygrunwald/go-trending" or "airbnb/javascript".
-	Name string
+	Name string `json:"name"`
 
 	// Owner is the name of the user or organisation. "andygrunwald" in "andygrunwald/go-trending" or "airbnb" in "airbnb/javascript".
-	Owner string
+	Owner string `json:"owner"`
 
 	// RepositoryName is the name of therepository. "go-trending" in "andygrunwald/go-trending" or "javascript" in "airbnb/javascript".
-	RepositoryName string
+	RepositoryName string `json:"repositoryName"`
 
 	// Description is the description of the repository like "JavaScript Style Guide" (for "airbnb/javascript").
-	Description string
+	Description string `json:"description"`
 
 	// Language is the determined programing language of the project (by Github).
 	// Sometimes Language is an empty string, because Github can`t determine the (main) programing language (like for "google/deepdream").
-	Language string
+	Language string `json:"language"`
 
 	// Stars is the number of github stars this project received in the given timeframe (see TimeToday / TimeWeek / TimeMonth constants).
 	// This number don`t reflect the overall stars of the project.
-	Stars int
+	Stars int `json:"stars"`
 
 	// URL is the http(s) address of the project reflected as url.URL datastructure like "https://github.com/Workiva/go-datastructures".
-	URL *url.URL
+	URL *url.URL `json:"url"`
 
 	// ContributorURL is the http(s) address of the contributors page of the project reflected as url.URL datastructure like "https://github.com/Workiva/go-datastructures/graphs/contributors".
-	ContributorURL *url.URL
+	ContributorURL *url.URL  `jsonj:"contributorURL"`
 
 	// Contributor are a collection of Developer.
 	// Be aware that this collection don`t covers all contributor.
 	// Only those who are mentioned at githubs trending page.
-	Contributor []Developer
+	Contributor []Developer `json:"developers"`
 }
 
 // Language reflects a single (programing) language offered by github for filtering.
@@ -97,33 +97,33 @@ type Project struct {
 // For filter input you should use the URLName of Language.
 type Language struct {
 	// Name is the human readable name of the language like "Go" or "Web Ontology Language"
-	Name string
+	Name string `json:"name"`
 
 	// URLName is the machine readable / usable name of the language used for filtering / url parameters like "go" or "web-ontology-language".
 	// Please use URLName if you want to filter your requests.
-	URLName string
+	URLName string `json:"urlName"`
 
 	// URL is the filter URL for the language like "https://github.com/trending?l=go" for "go" or "https://github.com/trending?l=unknown" or "unknown".
-	URL *url.URL
+	URL *url.URL `json:"url"`
 }
 
 // Developer reflects a single trending developer / organisation.
 // It provides information as printed on the source website https://github.com/trending/developers.
 type Developer struct {
 	// ID is the github`s unique identifier of the user / organisation like 1342004 (google) or 698437 (airbnb).
-	ID int
+	ID int `json:"id"`
 
 	// // DisplayName is the username of the developer / organisation like "torvalds" or "apache".
-	DisplayName string
+	DisplayName string `json:"displayName"`
 
 	// FullName is the real name of the developer / organisation like "Linus Torvalds" (for "torvalds") or "The Apache Software Foundation" (for "apache").
-	FullName string
+	FullName string `json:"fullname"`
 
 	// URL is the http(s) address of the developer / organisation reflected as url.URL datastructure like https://github.com/torvalds.
-	URL *url.URL
+	URL *url.URL `json:"url"`
 
 	// Avatar is the http(s) address of the developer / organisation avatar as url.URL datastructure like https://avatars1.githubusercontent.com/u/1024025?v=3&s=192.
-	Avatar *url.URL
+	Avatar *url.URL `json:"avatarURL"`
 }
 
 // NewTrending is the main entry point of the trending package.
